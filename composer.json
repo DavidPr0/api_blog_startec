@@ -1,7 +1,12 @@
 {
-	"require:":{
-
-	},
+    "name": "david/api_cms",
+    "authors": [
+        {
+            "name": "DavidPr0",
+            "email": "davidpaco2.4@gmail.com"
+        }
+    ],
+	"require": {},
 	"autoload":{
 		"psr-4":{
 			"Controllers\\":"Controllers/",

@@ -1,4 +1,5 @@
 _vscode
+.vscode
 vendor
 storage
 settings

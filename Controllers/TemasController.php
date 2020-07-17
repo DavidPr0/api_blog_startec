@@ -23,7 +23,7 @@ class TemasController extends Controller
         if ($method == 'POST') {
             $array = !empty($dados) ?
                     $this->validaDadosRequiscaoGeral($dados, $obrigatorios) :
-                    ['error' => 'Requisição sem parâmetros'];
+                    ['error' => 'Requisição sem parâmetro'];
             if (empty($array['error'])) {
                 $temas = new Temas();
                 $dados['pasta'] = 'imagem_temas';

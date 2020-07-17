@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use \Core\Controller;
-use \Models\Usuarios;
+use Core\Controller;
+use Models\Usuarios;
 
 class FotosController extends Controller
 {
