@@ -15,7 +15,7 @@ class Imagens extends Model
                     :nome,
                     :id_usuario,
                     :tipo_aut,
-                    'NOW()'
+                    NOW()
                 )";
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->bindValue(':nome', $dados['nome']);

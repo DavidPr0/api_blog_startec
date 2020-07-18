@@ -26,7 +26,7 @@ class AutoresController extends Controller
                 $dados['id_usuario'] = $info->id_usuario;
                 $array = $autores->salvarAutor($dados);
                 if ($array) {
-                   $array = ['sucesso' => 'Autor cadastrado com sucesso'];
+                    $array = ['sucesso' => 'Autor cadastrado com sucesso'];
                 }
             }
         }
