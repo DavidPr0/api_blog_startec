@@ -79,7 +79,7 @@ class Controller
                 mkdir($path, true);
             }
             foreach ($imagem as $k => $val) {
-                $servidor = preg_replace("/[^a-zA-Z0-9-]/", "_", $val['name']);
+                $servidor = preg_replace('/[\/\s\/]/', '_', $val['name']);
                 $path2 =  $path . '/' . $servidor;
                 move_uploaded_file($val['tmp_name'], $path2);
             }

@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use \Core\Model;
+use Core\Model;
 
 class Imagens extends Model
 {
