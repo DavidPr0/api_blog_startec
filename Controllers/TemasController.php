@@ -42,7 +42,6 @@ class TemasController extends Controller
 
     private function validaDadosRequisicao()
     {
-        
     }
 
     public function listar()
@@ -59,5 +58,4 @@ class TemasController extends Controller
         }
         $this->returnJson($retorno);
     }
-
 }

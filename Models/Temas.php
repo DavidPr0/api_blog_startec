@@ -15,6 +15,7 @@ class Temas extends Model
         $sql = "INSERT INTO conteudos_temas (
 				idconta_tema,
 				idusuario_tema,
+				nome_tema,
 				descricao_tema,
 				servidor_imagem_tema,
 				ativo_tema,
@@ -23,6 +24,7 @@ class Temas extends Model
 			VALUES (
 				:idconta,
 				:idusuario,
+				:nome
 				:descricao,
 				:servidor,
 				:ativo,
@@ -31,6 +33,7 @@ class Temas extends Model
         $sqlQuery = $this->db->prepare($sql);
         $sqlQuery->bindValue(':idconta', $config['idconta']);
         $sqlQuery->bindValue(':idusuario', $dados['id_usuario']);
+        $sqlQuery->bindValue(':nome', $dados['nome']);
         $sqlQuery->bindValue(':descricao', $dados['descricao']);
         $sqlQuery->bindValue(':servidor', $path);
         $sqlQuery->bindValue(':ativo', 'S');
@@ -40,5 +43,27 @@ class Temas extends Model
             return $controller->uploadImagem($dados['arquivos'], $dados['pasta']);
         }
         return false;
+    }
+
+    public function listarTemas()
+    {
+        global $config;
+        $temas = [];
+        $sql = "SELECT 
+				t.idtema, t.nome_tema, t.descricao_tema, t.servidor_imagem_tema, t.idusuario_tema, t.data_cad_tema
+			FROM
+				conteudos_temas as t
+			WHERE t.ativo_tema = :ativo
+			AND t.idconta_tema = :idconta";
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->bindValue(':ativo', 'S');
+        $sqlQuery->bindValue(':idconta', $config['idconta']);
+        $sqlQuery->execute();
+        
+        if ($sqlQuery->rowCount() > 0) {
+            $temas['retorno'] = $sqlQuery->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
+        return $temas;
     }
 }
