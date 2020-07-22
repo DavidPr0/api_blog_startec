@@ -31,6 +31,8 @@ class TemasController extends Controller
                 $array = $temas->salvarTema($dados);
                 if ($array) {
                     $array = ['sucesso' => 'Tema cadastrado com sucesso!'];
+                } else {
+                    $array = ['error' => 'Erro ao tentar cadastrar o tema.'];
                 }
             }
         }
