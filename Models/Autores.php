@@ -70,4 +70,28 @@ class Autores extends Model
         }
         return false;
     }
+
+    public function listarAutores()
+    {
+        global $config;
+        $autores = [];
+        $sql = "SELECT
+                a.idautor, a.idconta_aut, a.idusuario_aut, a.nome_aut, a.tipo_aut, i.servidor_aut_imag
+            FROM
+                autores as a
+            INNER JOIN autores_imagens as i ON (a.idautor = i.idautor_aut_imag)
+            WHERE a.ativo_aut = :ativo
+            AND i.ativo_aut_imag = :ativo_img
+            AND a.idconta_aut = :idconta";
+        $sqlQuery = $this->db->prepare($sql);
+        $sqlQuery->bindValue(':ativo', 'S');
+        $sqlQuery->bindValue(':ativo_img', 'S');
+        $sqlQuery->bindValue(':idconta', $config['idconta']);
+        $sqlQuery->execute();
+
+        if ($sqlQuery->rowCount() > 0) {
+            $autores['retorno'] = $sqlQuery->fetchAll(\PDO::FETCH_ASSOC);
+        }
+        return $autores;
+    }
 }

@@ -14,12 +14,11 @@ class AutoresController extends Controller
         $obrigadtorio = ['nome'];
         $method = $this->getMethod();
         $dados = $this->getRequestData();
-        $jwt = new Jwt();
-        $info = $jwt->validate($dados['token']);
+        $info = $this->validaUsuarioToken($dados['token']);
 
         if ('POST' == $method) {
             $array = !empty($dados) ? $this->validaDadosRequiscaoGeral($dados, $obrigadtorio) :
-                ['error' => 'Requisição sem parâmetro'];
+            ['error' => 'Requisição sem parâmetro'];
             if (empty($array['error'])) {
                 $autores = new Autores();
                 $dados['pasta'] = 'imagens_autores';
@@ -31,5 +30,25 @@ class AutoresController extends Controller
             }
         }
         $this->returnJson($array);
+    }
+
+    private function validaUsuarioToken($token)
+    {
+        $jwt = new Jwt();
+        return $jwt->validate($token);
+    }
+
+    public function listar()
+    {
+        $array = ['error' => ''];
+        $method = $this->getMethod();
+        $dados = $this->getRequestData();
+        $info = $this->validaUsuarioToken($dados['token']);
+
+        if ($method == 'GET') {
+            $autoresObj = new Autores();
+            $array = $autoresObj->listarAutores();
+        }
+        return $this->returnJson($array);
     }
 }
